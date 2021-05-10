@@ -10,7 +10,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - mvn clean install
+      - mvn --version
+      - echo 'hello world' > messageUtil-1.0.jar
   post_build:
     commands:
       - echo Build completed on `date`

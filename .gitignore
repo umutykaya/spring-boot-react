@@ -1,0 +1,14 @@
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+.idea
+.vscode
+node_modules
+target
+conf
+copilot
+.platform
+.ebsextensions/
+react-and-spring-data-rest.iml

@@ -11,10 +11,11 @@ phases:
     commands:
       - echo Build started on `date`
       - mvn --version
-      - echo 'hello world' > messageUtil-1.0.jar
+      - mvn clean install
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo build complete react-and-spring-data-rest:0.0.2
 artifacts:
   files:
-    - target/messageUtil-1.0.jar
+    - target/spring-1.0.jar

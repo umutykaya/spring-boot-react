@@ -6,6 +6,9 @@ phases:
       java: corretto11
   pre_build:
     commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - echo maven version check
       - mvn --version
       - mvn clean install

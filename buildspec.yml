@@ -6,17 +6,18 @@ phases:
       java: corretto11
   pre_build:
     commands:
-      - echo Nothing to do in the pre_build phase...
+      - echo maven version check
+      - mvn --version
+      - mvn clean install
   build:
     commands:
       - echo Build started on `date`
-      - mvn --version
-      - mvn clean install
       - mvn package
+      - export IMAGE_TAG=latest
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo build complete react-and-spring-data-rest:0.0.2
+      - printf '[{"name":"hello-world","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json
 artifacts:
-  files:
-    - target/spring-1.0.jar
+  files: imagedefinitions.json

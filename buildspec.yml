@@ -23,6 +23,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push $REPOSITORY_URI:postgres-$IMAGE_TAG
       - echo Writing image definitions file...
       - printf '[{"name":"container","imageUri":"%s"},{"name":"container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:postgres-$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json

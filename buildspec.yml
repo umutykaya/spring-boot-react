@@ -15,18 +15,17 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - docker-compose up -d
+      - echo docker image after build
       - docker images
       - export IMAGE_TAG=1.1.0
-      - docker pull postgres
       - docker tag react-and-spring-data-rest:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
-      - docker tag postgres:latest $REPOSITORY_URI:postgres-$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - docker push $REPOSITORY_URI:postgres-$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"container","imageUri":"%s"},{"name":"database","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:postgres-$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
   files: imagedefinitions.json

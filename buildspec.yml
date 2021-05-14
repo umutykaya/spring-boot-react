@@ -19,9 +19,12 @@ phases:
       - echo $AWS_SECRET_ACCESS_KEY
       - export AWS_SESSION_TOKEN=$(cat creds.json | jq -r .Token)
       - echo $AWS_SESSION_TOKEN
+      - docker context create ecs demoecs --from-env
+      - docker context use demoecs
   build:
     commands:
       - echo Build started on `date`
-      - aws cloudformation create-stack --stack-name compose-infrastructure --template-body file://docker-compose-dev.yml --capabilities CAPABILITY_IAM
+      - echo Convert Compose File
+      - docker compose up
       - echo docker image after build
       - docker images

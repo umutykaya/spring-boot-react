@@ -15,9 +15,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - docker-compose up -d
-      - echo docker image after build
-      - docker images
+      - mvn package
       - export IMAGE_TAG=1.1.0
       - docker tag react-and-spring-data-rest:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
   post_build:

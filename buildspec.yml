@@ -15,7 +15,6 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - docker-compose up -d
       - echo docker image after build
       - docker images
       - export IMAGE_TAG=1.1.0

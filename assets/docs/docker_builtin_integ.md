@@ -23,7 +23,7 @@ After the installation you can start using the cli
 - Run across ECS: `docker compose up`
 - Convert ECS yml: `docker compose convert >> docker-compose-dev.yml`
 - List running service: `docker compose ps`
-- Test prod endpoint: `curl my-app.region.elb.amazonaws.com:80`
+- Test prod endpoint: `curl -v -u greg:turnquist my-app.region.elb.amazonaws.com:8080/api/employees/3`
 - Show Cloudwatch logs: `docker compose logs`
 - Terminate service: `docker compose down`
 

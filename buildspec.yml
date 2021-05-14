@@ -2,30 +2,26 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      java: corretto11
+    commands:
+      - mv /usr/local/bin/docker /usr/bin/docker
+      - curl -L https://raw.githubusercontent.com/docker/compose-cli/main/scripts/install/install_linux.sh | sh
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - echo maven version check
-      - mvn --version
-      - mvn clean install
+      - echo Creating Docker Compose Context
+      - curl "http://169.254.170.2${AWS_CONTAINER_CREDENTIALS_RELATIVE_URI}" > creds.json
+      - export AWS_ACCESS_KEY_ID=$(cat creds.json | jq -r .AccessKeyId)
+      - export AWS_SECRET_ACCESS_KEY=$(cat creds.json | jq -r .SecretAccessKey)
+      - export AWS_SESSION_TOKEN=$(cat creds.json | jq -r .Token)
+      - docker context create ecs demoecs --from-env
+      - docker context use demoecs
   build:
     commands:
       - echo Build started on `date`
-      - docker-compose up -d
+      - echo Convert Compose File
+      - docker --debug compose convert > cloudformation.yml
+      - docker compose up
       - echo docker image after build
       - docker images
-      - export IMAGE_TAG=1.1.0
-      - docker tag react-and-spring-data-rest:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
-  post_build:
-    commands:
-      - echo Build completed on `date`
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Writing image definitions file...
-      - printf '[{"name":"container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - cat imagedefinitions.json
-artifacts:
-  files: imagedefinitions.json

@@ -10,7 +10,7 @@ After the installation you can start using the cli
 
 - Local deploy: `docker compose up -d`
 - Validate containers: `docker ps`
-- Frontend test: `curl localhost:80`
+- Frontend test: `curl -v -u greg:turnquist localhost:8080/api/employees/3`
 - Push Docker Hub: `docker compose push`
 - Remove application: `docker compose down`
 

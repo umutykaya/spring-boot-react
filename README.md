@@ -27,7 +27,7 @@ json payload should look like below
             "ROLE_MANAGER"
         ]
     },
-"\_links": {
+"links": {
         "self": {
             "href": "http://localhost:8080/api/employees/1"
         }

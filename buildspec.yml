@@ -16,14 +16,15 @@ phases:
     commands:
       - echo Build started on `date`
       - mvn package
-      - export IMAGE_TAG=0.0.2
+      - export IMAGE_TAG=1.1.0
       - docker tag react-and-spring-data-rest:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
+      - docker tag postgres:postgres-$IMAGE_TAG $REPOSITORY_URI:postgres-$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"container","imageUri":"%s"},{"name":"container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:postgres-$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
   files: imagedefinitions.json

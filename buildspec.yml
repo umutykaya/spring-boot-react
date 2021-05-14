@@ -12,7 +12,6 @@ phases:
       - echo maven version check
       - mvn --version
       - mvn clean install
-      - mvn package
   build:
     commands:
       - echo Build started on `date`

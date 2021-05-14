@@ -12,10 +12,14 @@ phases:
       - echo maven version check
       - mvn --version
       - mvn clean install
+      - echo docker image before build
+      - docker images
   build:
     commands:
       - echo Build started on `date`
       - docker-compose build 2>&1 | tee -a log.txt
+      - echo docker image after build
+      - docker images
       - export IMAGE_TAG=1.1.0
       - docker tag react-and-spring-data-rest:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
   post_build:

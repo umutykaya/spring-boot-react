@@ -12,8 +12,6 @@ phases:
       - echo maven version check
       - mvn --version
       - mvn clean install
-      - echo docker image before build
-      - docker images
   build:
     commands:
       - echo Build started on `date`

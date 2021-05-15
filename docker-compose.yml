@@ -1,14 +1,15 @@
 version: '3.1'
 services:
   app:
-    container_name: react-and-spring-data-rest
-    image: react-and-spring-data-rest
+    container_name: spring
+    image: umutykaya/spring
     build: ./
     ports:
       - "8080:8080"
     depends_on:
       - postgresqldb
   postgresqldb:
+    container_name: spring_db
     image: postgres
     ports:
       - "5432:5432"

@@ -6,13 +6,13 @@ You can start the application (`make local-deploy`) and call the API by using th
 
 ### Local Test
 ```bash 
-curl -v -u greg:turnquist localhost:8080/api/employees/3
+curl -v -u greg:turnquist localhost:8080/api/employees/
 ```
 
 ### Production Test
 
 ```bash 
-curl -v -u greg:turnquist <domain_name>:8080/api/employees/3
+curl -v -u greg:turnquist <domain_name>:8080/api/employees/
 ```
 
 json payload should look like below

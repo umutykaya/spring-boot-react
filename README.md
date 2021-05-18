@@ -12,7 +12,7 @@ curl -v -u greg:turnquist localhost:8080/api/employees/
 ### Production Test
 
 ```bash 
-curl -v -u greg:turnquist <domain_name>:8080/api/employees/
+curl -v -u greg:turnquist <domain_name>/api/employees/
 ```
 
 json payload should look like below

@@ -37,7 +37,7 @@ json payload should look like below
 
 ### Cloud Integration
 You should have a CI/CD pipeline to iteratively improve the project.
-To deploy it on AWS by usind `CDK` see the following repository in here.
+To deploy it on AWS by using `CDK` see the following repository in [here](https://github.com/umutykaya/cdk-spring-pipeline).
 
 ---
 

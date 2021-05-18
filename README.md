@@ -1,6 +1,6 @@
 # Spring Boot React
 The application has a react frontend and a Spring Boot Rest API, packaged as a single module Maven application.
-You can start the application (`make d`) and call the API by using the following curl (shown with its output):
+You can start the application (`make local-deploy`) and call the API by using the following curl (shown with its output):
 
 ---
 
